@@ -4,7 +4,7 @@ import { NavLink } from 'react-router';
 const App = ()=> {
 
   return (
-    <div className="bg-pink-500 text-blue-600">
+    <div className="bg-lightviolet text-darkviolet">
         Omkar Panda
         <nav>
           <NavLink to="/about" end>
