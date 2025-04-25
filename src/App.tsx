@@ -1,19 +1,11 @@
 import './App.css';
-import { NavLink } from 'react-router';
-
+// import { NavLink } from 'react-router';
+import Landing from './components/Landing';
 const App = ()=> {
 
   return (
-    <div className="bg-lightviolet text-darkviolet">
-        Omkar Panda
-        <nav>
-          <NavLink to="/about" end>
-            About
-          </NavLink><br/>
-          <NavLink to="/projects" end>
-            Projects
-          </NavLink>
-        </nav>
+    <div className="align-center">
+        <Landing/>
     </div>
   )
 }

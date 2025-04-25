@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
+.space-mono-regular {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
 @theme {
     --color-darkblue: #211C84;
     --color-lightblue: #4D55CC;
-    --color-lightviolet: #7A73D1;
-    --color-darkviolet: #B5A8D5;
+    --color-lightviolet: #B5A8D5;
+    --color-darkviolet: #7A73D1;
 }
