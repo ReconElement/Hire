@@ -12,10 +12,10 @@ const Titlebar = ()=>{
                 <div className="p-3 hover-underline">
                     Companies 
                 </div>
-                <div className="p-3">
+                <div className="p-3 hover-underline">
                     Jobs
                 </div>
-                <div className="p-3">
+                <div className="p-3 hover-underline">
                     Services
                 </div>
             </div>
