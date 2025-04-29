@@ -4,7 +4,7 @@ const Landing = ()=>{
     return(
         <div className="flex flex-col justify-stretch">
             <Titlebar/>
-            <p>Hello saar</p>
+            <p>Content</p>
         </div>
     )
 }
