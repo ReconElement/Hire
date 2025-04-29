@@ -8,7 +8,7 @@ const Titlebar = ()=>{
             <div className="text-right flex-none space-mono-regular text-lightviolet text-base">
                 <span>Jobs</span>
             </div>
-            <div className="flex flex-row w-full justify-end poppins-regular text-lightviolet ">
+            <div className="hidden md:flex flex-row w-full justify-end poppins-regular text-lightviolet ">
                 <div className="p-3 hover-underline">
                     Companies 
                 </div>
