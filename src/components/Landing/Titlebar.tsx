@@ -1,4 +1,5 @@
 import '../../App.css';
+import Hamburger from '../../assets/hamburger';
 const Titlebar = ()=>{
     return(
         <div className="flex flex-row bg-darkviolet justify-stretch">
@@ -17,6 +18,16 @@ const Titlebar = ()=>{
                 </div>
                 <div className="p-3 hover-underline">
                     Services
+                </div>
+                <div className="">
+                    
+                </div>
+            </div>
+            <div className="md:hidden flex flex-row w-full justify-end poppins-regular text-lightviolet">
+                <div className="p-3">
+                    <svg className='h-2 w-2'>
+                        <Hamburger/>
+                    </svg>
                 </div>
             </div>
         </div>
