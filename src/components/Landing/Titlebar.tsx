@@ -1,5 +1,8 @@
 import '../../App.css';
-import Hamburger from '../../assets/hamburger';
+// import Hamburger from '../../assets/Hamburger';
+import Hamburger from "../../assets/hamburger.svg?react";
+import { NavLink } from 'react-router';
+
 const Titlebar = ()=>{
     return(
         <div className="flex flex-row bg-darkviolet justify-stretch">
@@ -11,19 +14,22 @@ const Titlebar = ()=>{
             </div>
             <div className="hidden md:flex flex-row w-full justify-end poppins-regular text-lightviolet ">
                 <div className="p-3 hover-underline">
-                    Companies 
+                    <nav>
+                        <NavLink to="/login">Login</NavLink>
+                    </nav>
                 </div>
                 <div className="p-3 hover-underline">
-                    Jobs
+                    <nav>
+                        <NavLink to="/signup">Sign up</NavLink>
+                    </nav>
                 </div>
                 <div className="p-3 hover-underline">
                     Services
                 </div>
-                <div className="">
-                    
-                </div>
+                
             </div>
-            <div className="md:hidden flex flex-row w-full justify-end poppins-regular text-lightviolet">
+            {/* To be made a responsive page on a later iteration */}
+            <div className="md:hidden flex flex-row justify-end poppins-regular text-lightviolet">
                 <div className="p-3">
                     <svg className='h-2 w-2'>
                         <Hamburger/>

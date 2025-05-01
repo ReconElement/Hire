@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import About from './components/About.tsx'
-import Projects from './components/Projects.tsx'
+import Login from './components/Login.tsx'
+import Signup from './components/Signup.tsx'
 import './index.css'
 // import App from './App.tsx'
 import Landing from './components/Landing.tsx'
@@ -12,8 +12,8 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Routes>
       <Route path="/" element={<Landing/>}/>
-      <Route path="/about" element={<About/>}/>
-      <Route path="/projects" element={<Projects/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/signup" element={<Signup/>}/>
     </Routes>
   </StrictMode>
   </BrowserRouter>,
