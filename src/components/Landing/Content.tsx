@@ -1,4 +1,5 @@
 import '../../App.css';
+import Card from '../../assets/Card';
 const Content = ()=>{
     return (
         <div className="py-18 px-3 ">
@@ -10,7 +11,7 @@ const Content = ()=>{
             </div>
             <div>
                 {/* refer to https://www.material-tailwind.com/docs/html/card#blog-card for these tailwind styles */}
-                <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                {/* <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
                     <div className="p-4">
                         <h5 className="mb-2 text-slate-800 text-xl font-semibold">
                             Practice customised mock interview with AI!
@@ -22,7 +23,8 @@ const Content = ()=>{
                             Sign up now! 
                         </button>
                     </div>
-                </div>
+                </div> */}
+                <Card/>
             </div>
         </div>
     )
