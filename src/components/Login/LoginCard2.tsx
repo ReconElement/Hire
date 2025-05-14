@@ -1,65 +1,110 @@
-import '../../App.css';
-import { useState } from 'react';
-import {create} from 'zustand';
+import "../../App.css";
+import { useState } from "react";
+import { create } from "zustand";
 type Credentials = {
-    UsernameOrEmail?: string,
-    password?: string
-}
-
-interface CredentialsV2{
-    credentials: {
-        UsernameOrEmail?: string,
-        password?: string,
-    },
-    changeUsernameOrEmail: ()=>void,
-    changePassword: ()=>void,
+  UsernameOrEmail?: string;
+  password?: string;
 };
 
-const LoginCard2 =()=>{
-    const [credentials, setCredentials] = useState<Credentials>({
-        UsernameOrEmail: undefined,
-        password: undefined
+interface CredentialsV2 {
+  dataSecret: {
+    UsernameOrEmail?: string;
+    password?: string;
+  };
+  changeUsernameOrEmail?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changePassword?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  Submit?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+}
+
+const useCredentials = create<CredentialsV2>()((set)=>({
+	dataSecret: {
+		UsernameOrEmail: undefined,
+		password: undefined
+	},
+	changeUsernameOrEmail: (e: React.ChangeEvent<HTMLInputElement>)=>{
+		e.preventDefault();
+		e.stopPropagation();
+		set((state)=>({dataSecret: {UsernameOrEmail: e.target.value, password: state.dataSecret.password }}));
+	},
+	changePassword: (e: React.ChangeEvent<HTMLInputElement>)=>{
+		e.preventDefault();
+		e.stopPropagation();
+		set((state)=>({dataSecret: {UsernameOrEmail: state.dataSecret.UsernameOrEmail, password: e.target.value}}));
+	},
+	Submit: (e: React.MouseEvent<HTMLInputElement, MouseEvent>)=>{
+		e.preventDefault();
+		e.stopPropagation();
+	}
+}))
+
+const LoginCard2 = () => {
+  const [Credentials, setCredentials] = useState<Credentials>({
+    UsernameOrEmail: undefined,
+    password: undefined,
+  });
+
+  const { dataSecret, changeUsernameOrEmail, changePassword, Submit } = useCredentials();
+
+  const onUsernameOrEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setCredentials({
+      ...Credentials,
+      UsernameOrEmail: e.target.value,
     });
+  };
+  const onPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setCredentials({
+      ...Credentials,
+      password: e.target.value,
+    });
+  };
 
-    const useCredentials = create<CredentialsV2>()((set)=>({
-        
-    }))
-
-    const onUsernameOrEmail = (e: React.ChangeEvent<HTMLInputElement>)=>{
-        e.preventDefault();
-        setCredentials({
-            ...credentials,
-            UsernameOrEmail: e.target.value
-        });
-    };
-    const onPassword = (e: React.ChangeEvent<HTMLInputElement>)=>{
-        e.preventDefault();
-        setCredentials({
-            ...credentials,
-            password: e.target.value
-        });
-    };
-
-    const onSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>)=>{
-        e.preventDefault();
-        e.stopPropagation();
-        //TODO: Send it through axios to the backend or something
-    }
-    return (
-        <div className="py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-1/4 rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
-            <div className="flex justify-center text-3xl p-2">
-                Login
-            </div>
-            <div className="flex flex-col">
-                <input type="text" name="username/email" onChange={onUsernameOrEmail} id="username/email" placeholder='username or email' className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-emerald-400" />
-                <input type="password" name="password" onChange={onPassword} id="password" placeholder='password' className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-emerald-400" />
-            </div>
-            <div className="flex justify-center">
-                {/* <button className='p-2 m-2 bg-darkviolet text-lightviolet rounded-2xl shadow-emerald-400'>Login</button> */}
-                <input type="submit" value="Submit" onClick={onSubmit} id="submit" className="p-2 m-2 bg-darkviolet text-lightviolet rounded-2xl shadow-md shadow-emerald-400 active:shadow-none"/>
-            </div>
-        </div>
-    )
+  const onSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    //Used for the bear experiment
+    e.preventDefault();
+    e.stopPropagation();
+    //TODO: Send it through axios to the backend or something
+    //Logging part
+    if(dataSecret.UsernameOrEmail){
+		console.log(dataSecret.UsernameOrEmail);
+	}else{
+		console.log("Data is not found, username perhaps is null or undefined")
+	}
+  };
+  return (
+    <div className="py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-1/4 rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
+      <div className="flex justify-center text-3xl p-2">Login</div>
+      <div className="flex flex-col">
+        <input
+          type="text"
+          name="username/email"
+          onChange={changeUsernameOrEmail}
+          id="username/email"
+          placeholder="username or email"
+          className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-emerald-400"
+        />
+        <input
+          type="password"
+          name="password"
+          onChange={changePassword}
+          id="password"
+          placeholder="password"
+          className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-emerald-400"
+        />
+      </div>
+      <div className="flex justify-center">
+        {/* <button className='p-2 m-2 bg-darkviolet text-lightviolet rounded-2xl shadow-emerald-400'>Login</button> */}
+        <input
+          type="submit"
+          value="Submit"
+          onClick={onSubmit}
+          id="submit"
+          className="p-2 m-2 bg-darkviolet text-lightviolet rounded-2xl shadow-md shadow-emerald-400 active:shadow-none"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default LoginCard2;
