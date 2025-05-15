@@ -34,6 +34,7 @@ const useCredentials = create<CredentialsV2>()((set)=>({
 	Submit: (e: React.MouseEvent<HTMLInputElement, MouseEvent>)=>{
 		e.preventDefault();
 		e.stopPropagation();
+    
 	}
 }))
 
@@ -73,7 +74,7 @@ const LoginCard2 = () => {
 	}
   };
   return (
-    <div className="py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-1/4 rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
+    <div dir="" className="fixed top-12 right-20 shadow shadow-emerald-200 py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-full rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
       <div className="flex justify-center text-3xl p-2">Login</div>
       <div className="flex flex-col">
         <input
