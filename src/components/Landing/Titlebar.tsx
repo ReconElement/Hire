@@ -5,10 +5,15 @@ import { createPortal } from 'react-dom';
 import { NavLink } from 'react-router';
 import LoginCard2 from '../Login/LoginCard2';
 import { useState } from 'react';
-const ShowLogin = ()=>{
+
+type Show ={
+    show: boolean,
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
+}
+const ShowLogin = ({show, setShow}:Show)=>{
     return createPortal(
             <div>
-                <LoginCard2/>
+                <LoginCard2 show={show} setShow={setShow}/>
             </div>,
             document.body
         );
@@ -24,12 +29,12 @@ const Titlebar = ()=>{
                 <span>Jobs</span>
             </div>
             <div className="hidden md:flex flex-row w-full justify-end poppins-regular text-lightviolet ">
-                <div className="p-3 hover-underline" onMouseEnter={()=>{setShow(!show)}} onMouseLeave={()=>{setTimeout(()=>setShow(!show), 5000)}}>
+                <div className="p-3 hover-underline" onMouseEnter={()=>{setShow(true); setTimeout(()=>setShow(false), 30000)}} /*onMouseLeave={()=>setTimeout(()=>setShow(false), 5000)}*/>
                     <nav>
                         <NavLink to="/login">Login</NavLink>
                     </nav>
                     {/* <button onClick={()=>{setShow(!show)}}>Login</button> */}
-                    {show && (<div className=''><ShowLogin/></div>)}
+                    {show && (<div className=''><ShowLogin show={show} setShow={setShow}/></div>)}
                 </div>
                 <div className="p-3 hover-underline">
                     <nav>

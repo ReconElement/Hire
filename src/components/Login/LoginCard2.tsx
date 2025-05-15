@@ -36,9 +36,14 @@ const useCredentials = create<CredentialsV2>()((set)=>({
 		e.stopPropagation();
     
 	}
-}))
+}));
 
-const LoginCard2 = () => {
+type Show={
+  show: boolean,
+  setShow: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const LoginCard2 = ({show, setShow}:Show) => {
   const [Credentials, setCredentials] = useState<Credentials>({
     UsernameOrEmail: undefined,
     password: undefined,
@@ -72,9 +77,10 @@ const LoginCard2 = () => {
 	}else{
 		console.log("Data is not found, username perhaps is null or undefined")
 	}
+  setShow(false);
   };
   return (
-    <div dir="" className="fixed top-12 right-20 shadow shadow-emerald-200 py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-full rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
+    <div dir="" onMouseEnter={()=>{setShow(true); setTimeout(()=>setShow(false), 30000)}} className="fixed top-12 right-20 shadow shadow-emerald-200 py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-full rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
       <div className="flex justify-center text-3xl p-2">Login</div>
       <div className="flex flex-col">
         <input
