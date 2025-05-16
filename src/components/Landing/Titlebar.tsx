@@ -1,5 +1,5 @@
 import '../../App.css';
-// import Hamburger from '../../assets/Hamburger';
+// import {ReactComponent as Hamburger} from '../../assets/hamburger.svg';
 import Hamburger from "../../assets/hamburger.svg?react";
 import { createPortal } from 'react-dom';
 import { NavLink } from 'react-router';

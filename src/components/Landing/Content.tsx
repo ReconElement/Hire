@@ -1,6 +1,7 @@
 import '../../App.css';
 import Card from '../../assets/Card';
 import { useNavigate } from 'react-router';
+import DisplayCards from './DisplayCards';
 const Content = ()=>{
     const navigate = useNavigate();
     const signup = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
@@ -18,6 +19,9 @@ const Content = ()=>{
             </div>
             <div>
                 <Card title="Practice customised mock interview with AI!" content="Your result will be visible only to you" buttonContent="Sign up now!" func={signup} />
+            </div>
+            <div>
+                <DisplayCards/>
             </div>
         </div>
     )
