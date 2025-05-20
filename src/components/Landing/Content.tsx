@@ -63,7 +63,8 @@ const Content = () => {
       </div>
       <div>
         <div className="flex flex-col">
-          {cards.map((ele)=>(<div><DisplayCards name={ele.name} logo={ele.logo}/></div>))}
+          {/* {cards.map((ele)=>(<div><DisplayCards name={ele.name} logo={ele.logo}/></div>))} */}
+          <DisplayCards/>
         </div>
       </div>
     </div>)
