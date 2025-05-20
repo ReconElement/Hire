@@ -2,22 +2,22 @@ import "../../App.css";
 import Card from "../../assets/Card";
 import { useNavigate } from "react-router";
 import DisplayCards from "./DisplayCards";
-import Remote from "./../../assets/remoteonetheme.svg";
-import MNC from "./../../assets/mnconetheme.svg";
-import Marketing from "./../../assets/marketingonetheme.svg";
-import Analytics from "./../../assets/analyticsonetheme.svg";
-import HR from "./../../assets/hronetheme.svg";
-import DataScience from "./../../assets/data-scienceonetheme.svg";
-import Sales from "./../../assets/salesonetheme.svg";
-import Banking from "./../../assets/financeonetheme.svg";
-import Fortune500 from "./../../assets/fortune-500onetheme.svg";
-import Software from "./../../assets/softwareonetheme.svg";
-import Engineering from "./../../assets/engineeringonetheme.svg";
+// import Remote from "./../../assets/remoteonetheme.svg";
+// import MNC from "./../../assets/mnconetheme.svg";
+// import Marketing from "./../../assets/marketingonetheme.svg";
+// import Analytics from "./../../assets/analyticsonetheme.svg";
+// import HR from "./../../assets/hronetheme.svg";
+// import DataScience from "./../../assets/data-scienceonetheme.svg";
+// import Sales from "./../../assets/salesonetheme.svg";
+// import Banking from "./../../assets/financeonetheme.svg";
+// import Fortune500 from "./../../assets/fortune-500onetheme.svg";
+// import Software from "./../../assets/softwareonetheme.svg";
+// import Engineering from "./../../assets/engineeringonetheme.svg";
 
-type displayProps = {
-    name: string,
-    logo: string,
-}
+// type displayProps = {
+//     name: string,
+//     logo: string,
+// }
 const Content = () => {
   const navigate = useNavigate();
   const signup = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

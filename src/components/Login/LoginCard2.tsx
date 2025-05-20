@@ -1,10 +1,10 @@
 import "../../App.css";
-import { useState } from "react";
+// import { useState } from "react";
 import { create } from "zustand";
-type Credentials = {
-  UsernameOrEmail?: string;
-  password?: string;
-};
+// type Credentials = {
+//   UsernameOrEmail?: string;
+//   password?: string;
+// };
 
 interface CredentialsV2 {
   dataSecret: {
@@ -39,11 +39,11 @@ const useCredentials = create<CredentialsV2>()((set)=>({
 }));
 
 type Show={
-  show: boolean,
+  // show: boolean,
   setShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const LoginCard2 = ({show, setShow}:Show) => {
+const LoginCard2 = ({ setShow}:Show) => {
   // const [Credentials, setCredentials] = useState<Credentials>({
   //   UsernameOrEmail: undefined,
   //   password: undefined,

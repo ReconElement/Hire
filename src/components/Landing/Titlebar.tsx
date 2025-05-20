@@ -7,13 +7,13 @@ import LoginCard2 from '../Login/LoginCard2';
 import { useState } from 'react';
 
 type Show ={
-    show: boolean,
+    // show: boolean,
     setShow: React.Dispatch<React.SetStateAction<boolean>>
 }
-const ShowLogin = ({show, setShow}:Show)=>{
+const ShowLogin = ({setShow}:Show)=>{
     return createPortal(
             <div>
-                <LoginCard2 show={show} setShow={setShow}/>
+                <LoginCard2 setShow={setShow}/>
             </div>,
             document.body
         );
@@ -34,7 +34,7 @@ const Titlebar = ()=>{
                         <NavLink to="/login">Login</NavLink>
                     </nav>
                     {/* <button onClick={()=>{setShow(!show)}}>Login</button> */}
-                    {show && (<div className=''><ShowLogin show={show} setShow={setShow}/></div>)}
+                    {show && (<div className=''><ShowLogin setShow={setShow}/></div>)}
                 </div>
                 <div className="p-3 hover-underline">
                     <nav>
