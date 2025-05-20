@@ -4,6 +4,7 @@ import '../App.css';
 import LoginCardPage from './Login/LoginCardPage';
 import Titlebar from './Login/Titlebar';
 import Footer from './Landing/Footer';
+import DisplayCards from './Landing/DisplayCards';
 // import ZusTest from './Login/ZusTest';
 const Login = ()=>{
     return(
@@ -14,7 +15,10 @@ const Login = ()=>{
             <div className="mt-2.5 flex justify-center">
                 <LoginCardPage/>
             </div>
-            <div className="mt-75 flex justify-center">
+            <div className="mt-32">
+                <DisplayCards/>
+            </div>
+            <div className="mt-11 flex justify-center">
                 <Footer/>
             </div>
         </div>
