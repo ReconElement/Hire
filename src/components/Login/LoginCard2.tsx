@@ -44,27 +44,27 @@ type Show={
 }
 
 const LoginCard2 = ({show, setShow}:Show) => {
-  const [Credentials, setCredentials] = useState<Credentials>({
-    UsernameOrEmail: undefined,
-    password: undefined,
-  });
+  // const [Credentials, setCredentials] = useState<Credentials>({
+  //   UsernameOrEmail: undefined,
+  //   password: undefined,
+  // });
 
-  const { dataSecret, changeUsernameOrEmail, changePassword, Submit } = useCredentials();
+  const { dataSecret, changeUsernameOrEmail, changePassword } = useCredentials();
 
-  const onUsernameOrEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setCredentials({
-      ...Credentials,
-      UsernameOrEmail: e.target.value,
-    });
-  };
-  const onPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setCredentials({
-      ...Credentials,
-      password: e.target.value,
-    });
-  };
+  // const onUsernameOrEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   setCredentials({
+  //     ...Credentials,
+  //     UsernameOrEmail: e.target.value,
+  //   });
+  // };
+  // const onPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   setCredentials({
+  //     ...Credentials,
+  //     password: e.target.value,
+  //   });
+  // };
 
   const onSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     //Used for the bear experiment

@@ -28,19 +28,19 @@ const Content = () => {
 
   
 
-  const cards: displayProps[] = [
-    { name: "Remote", logo: Remote },
-    { name: "MNC", logo: MNC },
-    { name: "Marketing", logo: Marketing },
-    { name: "Analytics", logo: Analytics },
-    { name: "HR", logo: HR },
-    { name: "Data Science", logo: DataScience },
-    { name: "Sales", logo: Sales },
-    { name: "Banking & Finance", logo: Banking },
-    { name: "Fortune 500", logo: Fortune500 },
-    { name: "Software & IT", logo: Software },
-    { name: "Engineering", logo: Engineering },
-  ];
+  // const cards: displayProps[] = [
+  //   { name: "Remote", logo: Remote },
+  //   { name: "MNC", logo: MNC },
+  //   { name: "Marketing", logo: Marketing },
+  //   { name: "Analytics", logo: Analytics },
+  //   { name: "HR", logo: HR },
+  //   { name: "Data Science", logo: DataScience },
+  //   { name: "Sales", logo: Sales },
+  //   { name: "Banking & Finance", logo: Banking },
+  //   { name: "Fortune 500", logo: Fortune500 },
+  //   { name: "Software & IT", logo: Software },
+  //   { name: "Engineering", logo: Engineering },
+  // ];
   return (
     <div className="py-18 px-3 ">
       <div>
