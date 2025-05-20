@@ -12,10 +12,6 @@ import Banking from "./../../assets/financeonetheme.svg";
 import Fortune500 from "./../../assets/fortune-500onetheme.svg";
 import Software from "./../../assets/softwareonetheme.svg";
 import Engineering from "./../../assets/engineeringonetheme.svg";
-type displayProps = {
-  name: string;
-  logo: string;
-};
 const DisplayCards = () => {
   // const logo = props.logo as React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   return (

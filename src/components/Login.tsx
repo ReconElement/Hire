@@ -2,13 +2,21 @@ import '../App.css';
 // import LoginCard from './Login/LoginCard';
 // import LoginCard2 from './Login/LoginCard2';
 import LoginCardPage from './Login/LoginCardPage';
+import Titlebar from './Login/Titlebar';
+import Footer from './Landing/Footer';
 // import ZusTest from './Login/ZusTest';
 const Login = ()=>{
     return(
-        <div>
-            Login Page
+        <div className="flex flex-col justify-stretch bg-darkviolet overflow-hidden">
+            
             {/* <LoginCard/> */}
-            <LoginCardPage/>
+            <Titlebar/>
+            <div className="mt-2.5 flex justify-center">
+                <LoginCardPage/>
+            </div>
+            <div className="mt-75 flex justify-center">
+                <Footer/>
+            </div>
         </div>
     )
 }

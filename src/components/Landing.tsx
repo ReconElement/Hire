@@ -4,10 +4,12 @@ import Content from './Landing/Content';
 import Footer from './Landing/Footer';
 const Landing = ()=>{
     return(
-        <div className="flex flex-col justify-stretch bg-darkviolet">
+        <div className="flex flex-col justify-stretch bg-darkviolet overflow-hidden">
             <Titlebar/>
             <Content/>
-            <Footer/>
+            <div className="flex justify-center">
+                <Footer/>
+            </div>
         </div>
     )
 }

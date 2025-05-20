@@ -38,7 +38,7 @@ const LoginCardPage = ()=>{
     }
     const {dataSecret, changeUsernameOrEmail, changePassword} = useCredentials();
     return (
-    <div className="max-w-1/4 shadow shadow-emerald-200 py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
+    <div className="max-w-3xs min-w-1/3 shadow shadow-emerald-200 py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
       <div className="flex justify-center text-3xl p-2">Login</div>
       <div className="flex flex-col">
         <input
