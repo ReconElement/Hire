@@ -1,7 +1,11 @@
+import '../App.css';
+import SignupCard from './Signup/SignupCard';
+import Titlebar from './Landing/Titlebar';
 const Signup = ()=>{
     return (
         <div>
-            Sign-up page
+            <Titlebar/>
+            <SignupCard/>
         </div>
     )
 }
