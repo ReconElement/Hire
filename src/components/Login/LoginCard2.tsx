@@ -80,7 +80,7 @@ const LoginCard2 = ({ setShow}:Show) => {
   setShow(false);
   };
   return (
-    <div dir="" onMouseEnter={()=>{setShow(true); setTimeout(()=>setShow(false), 30000)}} className="fixed top-12 right-20 shadow shadow-emerald-200 py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-full rounded-md bg-gradient-to-r from-lightviolet to-darkviolet">
+    <div dir="" onMouseEnter={()=>{setShow(true); setTimeout(()=>setShow(false), 30000)}} className="fixed top-12 right-20 shadow shadow-lightblue py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-full rounded-md bg-gradient-to-r from-lightviolet to-darkviolet">
       <div className="flex justify-center text-3xl p-2">Login</div>
       <div className="flex flex-col">
         <input
@@ -89,7 +89,7 @@ const LoginCard2 = ({ setShow}:Show) => {
           onChange={changeUsernameOrEmail}
           id="username/email"
           placeholder="username or email"
-          className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-emerald-400"
+          className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-lightblue"
         />
         <input
           type="password"
@@ -97,7 +97,7 @@ const LoginCard2 = ({ setShow}:Show) => {
           onChange={changePassword}
           id="password"
           placeholder="password"
-          className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-emerald-400"
+          className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-lightblue"
         />
       </div>
       <div className="flex justify-center">
@@ -107,7 +107,7 @@ const LoginCard2 = ({ setShow}:Show) => {
           value="Submit"
           onClick={onSubmit}
           id="submit"
-          className="p-2 m-2 bg-darkviolet text-lightviolet rounded-2xl shadow-md shadow-emerald-400 active:shadow-none"
+          className="p-2 m-2 bg-darkviolet text-lightviolet rounded-2xl shadow-md shadow-lightblue active:shadow-none"
         />
       </div>
     </div>
