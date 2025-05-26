@@ -1,7 +1,9 @@
 import '../../App.css';
 import {create} from "zustand";
+import { logInAPICall} from '../../API/auth';
 //for a simple trial, integrate this with the button 
-import getResponse from '../../API/auth';
+// import getResponse from '../../API/auth';
+
 interface Credentials{
     dataSecret: {
         userNameOrEmail?: string,
@@ -29,17 +31,26 @@ const useCredentials = create<Credentials>()((set)=>({
 }));
 
 const LoginCardPage = ()=>{
-    function onSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>){
-        e.preventDefault();
-        e.stopPropagation();
-        if(dataSecret.userNameOrEmail){
-            console.log("It works");
-        }else{
-            console.log("It does not work");
-        }
-        getResponse();
-    }
     const {dataSecret, changeUsernameOrEmail, changePassword} = useCredentials();
+    async function onSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>){
+      e.preventDefault();
+      e.stopPropagation();
+      let res;
+      if(dataSecret.userNameOrEmail && dataSecret.password){
+        try{
+          res = await logInAPICall(dataSecret.userNameOrEmail, dataSecret.password)
+        }
+        catch(e){
+          console.log(e);
+        }
+        console.log(res);
+      }
+      else{
+        alert(
+          'Incomplete form submission'
+        )
+      }
+    }
     return (
     <div className="max-w-3xs min-w-1/3 shadow shadow-lightblue py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 rounded-md bg-gradient-to-r from-darkviolet to-lightviolet">
       <div className="flex justify-center text-3xl p-2">Login</div>

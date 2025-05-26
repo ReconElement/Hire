@@ -12,4 +12,31 @@ const getResponse = async ()=>{
     }
 }
 
-export default getResponse;
+const signUpAPICall = async (fullName: string, email: string, userName: string, password: string)=>{
+    let res;
+    try{
+        res = await axios.post(`${import.meta.env.VITE_DEV_API_URL}/routes/signup`,{
+            fullName: fullName, email: email, userName: userName, password: password
+        });
+    }
+    catch(e){
+        console.log(e);
+    }
+    return res;
+}
+
+const logInAPICall = async (userNameOrEmail: string, password: string)=>{
+    let res;
+    try{
+        res = await axios.post(`${import.meta.env.VITE_DEV_API_URL}/routes/login`,{
+            userNameOrEmail: userNameOrEmail,
+            password: password
+        });
+    }
+    catch(e){
+        console.log(e);
+    }
+    return res;
+}
+
+export {getResponse, signUpAPICall, logInAPICall};

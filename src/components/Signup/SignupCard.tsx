@@ -1,6 +1,6 @@
 import '../../App.css';
 import {create} from 'zustand';
-
+import { signUpAPICall } from '../../API/auth';
 // values extracted {first name, last name, email, username, password}
 interface Credentials{
     dataSecret: {
@@ -76,18 +76,27 @@ const useCredentials = create<Credentials>()((set)=>({
         }}));
     }
 }));
-const SignupCard =()=>{
+
+
+const SignupCard= ()=>{
     const {dataSecret,setFirstName, setLastName, setEmail, setUserName, setPassword} = useCredentials();
-    function onSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
+    async function onSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
         e.preventDefault();
         e.stopPropagation();
+        let res;
         //send to the backend via axios or something
-        if(dataSecret.email && dataSecret.firstName && dataSecret.lastName && dataSecret.password && dataSecret.userName){
-            console.log(`All the values have been accepted for instance ${dataSecret.email}, ${dataSecret.firstName}, ${dataSecret.lastName} etc`)
+        if(dataSecret.email && dataSecret.firstName && dataSecret.lastName && dataSecret.userName && dataSecret.password){
+            try{
+                const fullName = dataSecret.firstName+' '+dataSecret.lastName;
+                res = await signUpAPICall(fullName, dataSecret.email, dataSecret.userName, dataSecret.password);
+            }
+            catch(e){
+                console.log(e)
+            }
+            console.log(res);
         }
         else{
-            console.log("Some problem might have occurred not all the values have been captured or some field is left unattended");
-            console.log(`${dataSecret.firstName} ${dataSecret.lastName} ${dataSecret.email} ${dataSecret.userName}`)
+            alert('Incomplete form submission');
         }
     }
     //previous size: max-w-1/3 min-w-xs
