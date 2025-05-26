@@ -13,7 +13,6 @@ const Landing = ()=>{
         </div>
     )
 }
-
 export default Landing;
 /**
  * Note:  https://www.material-tailwind.com/docs/html/card#blog-card

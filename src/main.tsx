@@ -5,7 +5,7 @@ import Login from './components/Login.tsx'
 import Signup from './components/Signup.tsx'
 import './index.css'
 // import App from './App.tsx'
-import Landing from './components/Landing.tsx'
+import Landing from './components/Landing.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>

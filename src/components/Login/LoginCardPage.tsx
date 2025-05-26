@@ -1,5 +1,7 @@
 import '../../App.css';
 import {create} from "zustand";
+//for a simple trial, integrate this with the button 
+import getResponse from '../../API/auth';
 interface Credentials{
     dataSecret: {
         userNameOrEmail?: string,
@@ -35,6 +37,7 @@ const LoginCardPage = ()=>{
         }else{
             console.log("It does not work");
         }
+        getResponse();
     }
     const {dataSecret, changeUsernameOrEmail, changePassword} = useCredentials();
     return (
