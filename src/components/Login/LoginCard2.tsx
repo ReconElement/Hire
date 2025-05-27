@@ -1,35 +1,36 @@
 import "../../App.css";
+import { logInAPICall } from "../../API/auth";
 // import { useState } from "react";
 import { create } from "zustand";
 // type Credentials = {
-//   UsernameOrEmail?: string;
+//   userNameOrEmail?: string;
 //   password?: string;
 // };
 
 interface CredentialsV2 {
   dataSecret: {
-    UsernameOrEmail?: string;
+    userNameOrEmail?: string;
     password?: string;
   };
-  changeUsernameOrEmail?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeuserNameOrEmail?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   changePassword?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   Submit?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
 }
 
 const useCredentials = create<CredentialsV2>()((set)=>({
 	dataSecret: {
-		UsernameOrEmail: undefined,
+		userNameOrEmail: undefined,
 		password: undefined
 	},
-	changeUsernameOrEmail: (e: React.ChangeEvent<HTMLInputElement>)=>{
+	changeuserNameOrEmail: (e: React.ChangeEvent<HTMLInputElement>)=>{
 		e.preventDefault();
 		e.stopPropagation();
-		set((state)=>({dataSecret: {UsernameOrEmail: e.target.value, password: state.dataSecret.password }}));
+		set((state)=>({dataSecret: {userNameOrEmail: e.target.value, password: state.dataSecret.password }}));
 	},
 	changePassword: (e: React.ChangeEvent<HTMLInputElement>)=>{
 		e.preventDefault();
 		e.stopPropagation();
-		set((state)=>({dataSecret: {UsernameOrEmail: state.dataSecret.UsernameOrEmail, password: e.target.value}}));
+		set((state)=>({dataSecret: {userNameOrEmail: state.dataSecret.userNameOrEmail, password: e.target.value}}));
 	},
 	Submit: (e: React.MouseEvent<HTMLInputElement, MouseEvent>)=>{
 		e.preventDefault();
@@ -45,17 +46,17 @@ type Show={
 
 const LoginCard2 = ({ setShow}:Show) => {
   // const [Credentials, setCredentials] = useState<Credentials>({
-  //   UsernameOrEmail: undefined,
+  //   userNameOrEmail: undefined,
   //   password: undefined,
   // });
 
-  const { dataSecret, changeUsernameOrEmail, changePassword } = useCredentials();
+  const { dataSecret, changeuserNameOrEmail, changePassword } = useCredentials();
 
-  // const onUsernameOrEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // const onuserNameOrEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   e.preventDefault();
   //   setCredentials({
   //     ...Credentials,
-  //     UsernameOrEmail: e.target.value,
+  //     userNameOrEmail: e.target.value,
   //   });
   // };
   // const onPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,18 +67,25 @@ const LoginCard2 = ({ setShow}:Show) => {
   //   });
   // };
 
-  const onSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    //Used for the bear experiment
+  const onSubmit = async (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.preventDefault();
-    e.stopPropagation();
-    //TODO: Send it through axios to the backend or something
-    //Logging part
-    if(dataSecret.UsernameOrEmail){
-		console.log(dataSecret.UsernameOrEmail);
-	}else{
-		console.log("Data is not found, username perhaps is null or undefined")
-	}
-  setShow(false);
+      e.stopPropagation();
+      let res;
+      if(dataSecret.userNameOrEmail && dataSecret.password){
+        try{
+          res = await logInAPICall(dataSecret.userNameOrEmail, dataSecret.password)
+        }
+        catch(e){
+          console.log(e);
+        }
+        console.log(res);
+      }
+      else{
+        alert(
+          'Incomplete form submission'
+        )
+      }
+    setShow(false);
   };
   return (
     <div dir="" onMouseEnter={()=>{setShow(true); setTimeout(()=>setShow(false), 30000)}} className="fixed top-12 right-20 shadow shadow-lightblue py-2 px-2 text-lightviolet poppins-regular mx-2 my-2 max-w-full rounded-md bg-gradient-to-r from-lightviolet to-darkviolet">
@@ -86,7 +94,7 @@ const LoginCard2 = ({ setShow}:Show) => {
         <input
           type="text"
           name="username/email"
-          onChange={changeUsernameOrEmail}
+          onChange={changeuserNameOrEmail}
           id="username/email"
           placeholder="username or email"
           className="p-2 m-2 bg-darkviolet text-lightviolet outline-none rounded-xl shadow-sm shadow-lightblue"

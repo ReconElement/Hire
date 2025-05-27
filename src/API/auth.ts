@@ -27,16 +27,20 @@ const signUpAPICall = async (fullName: string, email: string, userName: string, 
 
 const logInAPICall = async (userNameOrEmail: string, password: string)=>{
     let res;
+    let jwtToken: string;
     try{
         res = await axios.post(`${import.meta.env.VITE_DEV_API_URL}/routes/login`,{
             userNameOrEmail: userNameOrEmail,
             password: password
         });
+        jwtToken = res.data as string;
+        sessionStorage.setItem('jwtToken',jwtToken);
     }
     catch(e){
         console.log(e);
     }
     return res;
+    
 }
 
 export {getResponse, signUpAPICall, logInAPICall};
