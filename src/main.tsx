@@ -16,7 +16,16 @@ createRoot(document.getElementById('root')!).render(
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/post" element={<Post/>}>
-        {/* Post routings to be placed here */}
+        {/* 
+          Sample routing for post --
+          <Route path="posts">
+            <Route index element={<PostsHome/>}/>
+            <Route element={<PostsLayout/>}>
+              <Route path=":pid" element={<Post/>}/>
+              <Route path=":pid/edit element={<EditProject/>}">
+            </Route>
+          </Route>
+        */}
       </Route>
     </Routes>
   </StrictMode>

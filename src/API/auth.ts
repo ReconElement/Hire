@@ -39,6 +39,7 @@ const logInAPICall = async (userNameOrEmail: string, password: string)=>{
     catch(e){
         console.log(e);
     }
+    console.log(sessionStorage.getItem('jwtToken'));
     return res;
     
 }
