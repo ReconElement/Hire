@@ -1,4 +1,5 @@
 import axios from 'axios';
+import cookie from 'cookie';
 const getResponse = async ()=>{
     let res;
     try{
@@ -39,9 +40,7 @@ const logInAPICall = async (userNameOrEmail: string, password: string)=>{
     catch(e){
         console.log(e);
     }
-    console.log(sessionStorage.getItem('jwtToken'));
     return res;
-    
 }
 
 export {getResponse, signUpAPICall, logInAPICall};

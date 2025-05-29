@@ -1,8 +1,25 @@
 import '../../App.css';
 import {create} from "zustand";
 import { logInAPICall} from '../../API/auth';
+
 //for a simple trial, integrate this with the button 
-// import getResponse from '../../API/auth';
+interface cookieHeader{
+  'Set-Cookie'?:string
+}
+
+interface AuthCookie{
+  cookie?: cookieHeader,
+  setAuthCookie: (cookie: cookieHeader)=>void,
+}
+
+const useAuthentication = create<AuthCookie>()((set)=>({
+  cookie: undefined,
+  setAuthCookie: function(cookie: cookieHeader){
+    set(()=>({
+      cookie: cookie
+    }))
+  }
+}))
 
 interface Credentials{
     dataSecret: {
@@ -32,6 +49,7 @@ const useCredentials = create<Credentials>()((set)=>({
 
 const LoginCardPage = ()=>{
     const {dataSecret, changeUsernameOrEmail, changePassword} = useCredentials();
+    const {cookie, setAuthCookie} = useAuthentication();
     async function onSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>){
       e.preventDefault();
       e.stopPropagation();
@@ -43,6 +61,7 @@ const LoginCardPage = ()=>{
         catch(e){
           console.log(e);
         }
+        setAuthCookie(res?.headers['Set-Cookie']);
         console.log(res);
       }
       else{
