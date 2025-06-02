@@ -1,5 +1,4 @@
 import axios from 'axios';
-import cookie from 'cookie';
 const getResponse = async ()=>{
     let res;
     try{
@@ -26,16 +25,16 @@ const signUpAPICall = async (fullName: string, email: string, userName: string, 
     return res;
 }
 
+
+//login and get the Cookie as well.
 const logInAPICall = async (userNameOrEmail: string, password: string)=>{
     let res;
-    let jwtToken: string;
+    // let jwtToken: string;
     try{
         res = await axios.post(`${import.meta.env.VITE_DEV_API_URL}/routes/login`,{
             userNameOrEmail: userNameOrEmail,
             password: password
-        });
-        jwtToken = res.data as string;
-        sessionStorage.setItem('jwtToken',jwtToken);
+        }, {withCredentials: true});
     }
     catch(e){
         console.log(e);

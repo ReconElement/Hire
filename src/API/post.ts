@@ -1,4 +1,5 @@
 import axios from 'axios';
+axios.defaults.withCredentials = true; //sends every request with cookies 
 const getPostAPICall = async ()=>{
     let res;
     try{
@@ -12,15 +13,10 @@ const getPostAPICall = async ()=>{
 
 const postPostAPICall = async (title: string, content: string)=>{
     let res;
-    const jwtToken = sessionStorage.getItem("jwtToken");
-    console.log(jwtToken);
     try{
         res = await axios.post(`${import.meta.env.VITE_DEV_API_URL}/post/`, {
-            Headers: {
-                authorization: `${jwtToken}`
-            },
             title: title,
-            content: content
+            content: content,
         });
     }
     catch(e){
