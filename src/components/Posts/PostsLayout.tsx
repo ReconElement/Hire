@@ -2,7 +2,9 @@ import '../../App.css';
 const PostsLayout = ()=>{
     return(
         <div>
-            PostsLayout
+            <h1>
+                Under ideal scenario you should be seeing the detailed view of Post here
+            </h1>
         </div>
     )
 };

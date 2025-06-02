@@ -19,15 +19,12 @@ createRoot(document.getElementById('root')!).render(
       <Route path="/" element={<Landing/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup/>}/>
-      <Route path="/post" element={<Post/>}>
-          <Route path="posts">
-            <Route index element={<Posts/>}/> 
-            <Route element={<PostsLayout/>}>
-              <Route path=":pid" element={<PostExpand/>}/>
-              <Route path=":pid/edit" element={<EditPost/>}>
-            </Route>
-          </Route>
-      </Route>
+      <Route path="/post" element={<Post/>}/>
+      {/* <Route path="/posts" element={<Posts/>}>
+        <Route path="/expand" element={<PostExpand/>}/>
+      </Route> */}
+      <Route path="/posts" element={<Posts/>}>
+        <Route path="/:id" element={<PostExpand/>}/>
       </Route>
     </Routes>
   </StrictMode>
