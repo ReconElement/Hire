@@ -6,10 +6,10 @@ const Post = ()=>{
     return (
         <div className="flex flex-col justify-stretch bg-darkviolet overflow-hidden ">
             <Titlebar/>
-            <div className="mt-2.5 flex justify-center">
+            <div className="mt-11 flex justify-center">
                 <PostCard/>
             </div>
-            <div className="mt-11 flex justify-center">
+            <div className="mt-24 flex justify-center">
                 <Footer/>
             </div>
         </div>

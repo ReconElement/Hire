@@ -5,12 +5,14 @@ import Footer from './Landing/Footer';
 import DisplayCards from './Landing/DisplayCards';
 const Signup = ()=>{
     return (
-        <div>
+        <div className="">
             <div className="flex flex-col justify-stretch bg-darkviolet overflow-hidden">
             
             {/* <LoginCard/> */}
-            <Titlebar/>
-            <div className="mt-2.5 flex justify-center">
+            <nav className="">
+                <Titlebar/>
+            </nav>
+            <div className="mt-6 flex justify-center">
                 <SignupCard/>
             </div>
             <div className="mt-32">

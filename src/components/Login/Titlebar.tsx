@@ -2,7 +2,7 @@ import "./../../App.css";
 import { NavLink } from "react-router";
 const Titlebar = () => {
   return (
-    <div className="flex flex-row bg-darkviolet justify-stretch">
+    <div className="flex flex-row bg-darkviolet justify-stretch fixed top-0 w-full">
       <div className="text-center flex-none space-mono-regular text-lightviolet text-5xl pl-3">
         <nav>
           <NavLink to="/">

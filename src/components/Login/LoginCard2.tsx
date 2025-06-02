@@ -2,10 +2,12 @@ import "../../App.css";
 import { logInAPICall } from "../../API/auth";
 // import { useState } from "react";
 import { create } from "zustand";
+import {useNavigate} from 'react-router'
 // type Credentials = {
 //   userNameOrEmail?: string;
 //   password?: string;
 // };
+
 
 interface CredentialsV2 {
   dataSecret: {
@@ -49,7 +51,7 @@ const LoginCard2 = ({ setShow}:Show) => {
   //   userNameOrEmail: undefined,
   //   password: undefined,
   // });
-
+  const navigate = useNavigate();
   const { dataSecret, changeuserNameOrEmail, changePassword } = useCredentials();
 
   // const onuserNameOrEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +80,11 @@ const LoginCard2 = ({ setShow}:Show) => {
         catch(e){
           console.log(e);
         }
-        console.log(res);
+        if(res?.status===200){
+          navigate('/post');
+        }else{
+          alert("Wrong email/username or password");
+        }
       }
       else{
         alert(

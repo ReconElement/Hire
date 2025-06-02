@@ -2,7 +2,7 @@ import '../../App.css';
 function Posts(){
     return(
         <div>
-            posts are visible here
+            Posts are present here.
         </div>
     )
 };

@@ -6,8 +6,10 @@ const Landing = ()=>{
     return(
         <div className="flex flex-col justify-stretch bg-darkviolet overflow-hidden">
             <Titlebar/>
-            <Content/>
-            <div className="flex justify-center">
+            <div className="pt-11">
+                <Content/>
+            </div>
+            <div className="flex justify-center pt-1">
                 <Footer/>
             </div>
         </div>
@@ -17,3 +19,4 @@ export default Landing;
 /**
  * Note:  https://www.material-tailwind.com/docs/html/card#blog-card
  */
+

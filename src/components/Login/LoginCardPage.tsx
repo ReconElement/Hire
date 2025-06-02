@@ -1,6 +1,7 @@
 import '../../App.css';
 import {create} from "zustand";
 import { logInAPICall} from '../../API/auth';
+import { useNavigate } from 'react-router';
 
 
 interface Credentials{
@@ -30,6 +31,7 @@ const useCredentials = create<Credentials>()((set)=>({
 }));
 
 const LoginCardPage = ()=>{
+    const navigate = useNavigate();
     const {dataSecret, changeUsernameOrEmail, changePassword} = useCredentials();
     async function onSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>){
       e.preventDefault();
@@ -42,7 +44,11 @@ const LoginCardPage = ()=>{
         catch(e){
           console.log(e);
         }
-        console.log(res);
+        if(res?.status===200){
+          navigate('/post')
+        }else{
+          alert("Wrong username/email or password")
+        }
       }
       else{
         alert(

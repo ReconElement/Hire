@@ -13,13 +13,13 @@ const Login = ()=>{
             
             {/* <LoginCard/> */}
             <Titlebar/>
-            <div className="mt-2.5 flex justify-center">
+            <div className="mt-11 flex justify-center">
                 <LoginCardPage/>
             </div>
             <div className="mt-32">
                 <DisplayCards/>
             </div>
-            <div className="mt-11 flex justify-center">
+            <div className="mt-15 flex justify-center">
                 <Footer/>
             </div>
         </div>
