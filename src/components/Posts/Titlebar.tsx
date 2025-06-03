@@ -1,11 +1,12 @@
 import "../../App.css";
+import { NavLink } from "react-router";
 const TitleBar = () => {
   return (
     <div className="flex flex-row bg-darkviolet justify-stretch fixed top-0 w-full">
       <div className="text-center flex-none space-mono-regular text-lightviolet text-5xl pl-3">
-        <nav>
-          <span>hire.com</span>
-        </nav>
+        <NavLink to="/">
+            <span>hire.com</span>
+          </NavLink>
       </div>
       <div className="text-right flex-none space-mono-regular text-lightviolet text-base">
         <span>Jobs</span>

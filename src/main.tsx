@@ -7,7 +7,8 @@ import Post from './components/Post.tsx'
 import Posts from './components/Posts/Posts.tsx';
 import PostDetail from './components/Posts/PostDetail.tsx'
 import PostExpand from './components/Posts/PostExpand.tsx'
-import './index.css'
+import './index.css';
+import Posts2 from './components/Posts/Posts2.tsx'
 // import App from './App.tsx'
 import Landing from './components/Landing.tsx';
 
