@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { getPostAPICall } from '../../API/post';
-import { useState } from 'react';
+import PostListCard from './PostListCard';
 import {create} from 'zustand';
 import '../../App.css';
 type Post={
@@ -26,7 +26,7 @@ interface PostsAPI{
     setPosts: (t: PostsAPI["posts"])=>void;
 }
 
-const usePostsStorage = create<PostsAPI>((set)=>({
+const usePostsStorage = create<PostsAPI>()((set)=>({
     posts: undefined,
     loading: false,
     setLoading: (value: boolean)=>{
@@ -68,6 +68,7 @@ const Posts = ()=>{
             {/* <div>{loading?posts[1].content:""}</div> */}
             {(loading && posts) && <div>{posts.map((value: Post, id: number)=><div><Expand key={value.id} value={value} id={id}/></div>)}</div>}
             {/* {(loading && posts) && <div><h1>SHIEET</h1></div>} */}
+            <PostListCard/>
         </div>
     )
 };
@@ -82,3 +83,5 @@ function Expand(props: {value: Post, id: number}){
     )
 }
 export default Posts;
+
+
