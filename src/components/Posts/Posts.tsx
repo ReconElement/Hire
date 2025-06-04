@@ -3,6 +3,8 @@ import { getPostAPICall } from '../../API/post';
 import PostListCard from './PostListCard';
 import {create} from 'zustand';
 import '../../App.css';
+import TitleBar from '../Posts/Titlebar';
+import Footer from '../Landing/Footer';
 type Post={
     id: number,
     title: string,
@@ -63,12 +65,14 @@ const Posts = ()=>{
     }, []);
     
     return(
-        <div>
-            <button type="button">Wait for the fun bro: {loading?"present":"not present"}</button>
-            {/* <div>{loading?posts[1].content:""}</div> */}
-            {(loading && posts) && <div>{posts.map((value: Post, id: number)=><div><Expand key={value.id} value={value} id={id}/></div>)}</div>}
-            {/* {(loading && posts) && <div><h1>SHIEET</h1></div>} */}
-            <PostListCard/>
+        <div className="bg-darkviolet min-h-screen">
+            <div>
+                <TitleBar/>
+            </div>
+            <div className=' pt-12 px-2'>
+                {(loading && posts) && <div className="flex justify-left flex-wrap">{posts?.map((val: Post, id: number)=>(<div><PostListCard value={val} id={val.id}/></div>))}</div>}
+            </div>
+            <div className="flex justify-center p-2"><Footer/></div>
         </div>
     )
 };
@@ -83,5 +87,6 @@ function Expand(props: {value: Post, id: number}){
     )
 }
 export default Posts;
+//going for a piss will come back.
 
 
