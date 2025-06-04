@@ -5,8 +5,10 @@ import Login from './components/Login.tsx'
 import Signup from './components/Signup.tsx'
 import Post from './components/Post.tsx'
 import Posts from './components/Posts/Posts.tsx';
+import PostPage from './components/Posts/PostPage.tsx'
 import PostDetail from './components/Posts/PostDetail.tsx'
 import PostExpand from './components/Posts/PostExpand.tsx'
+import NewPosts from './components/Posts/NewPosts.tsx'
 // import PostsPersist from './components/Posts/PostsPersist.tsx'
 import './index.css';
 // import App from './App.tsx'
@@ -20,13 +22,16 @@ createRoot(document.getElementById('root')!).render(
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/post" element={<Post/>}/>
-      <Route path="/posts">
-        <Route index element={<Posts/>}/>
+      {/* <Route path="/posts"> */}
+        {/* <Route index element={<Posts/>}/> */}
         {/* On pressing on any individual post it should navigate to PostDetail of that specific post */}
-        <Route element={<PostDetail/>}>
+        {/* <Route element={<PostDetail/>}>
           <Route path=":post" element={<PostExpand/>}/>
+        </Route> */}
+      {/* </Route> */}
+        <Route path="/posts" element={<NewPosts/>}>
+          <Route path=":page" element={<PostPage/>}/>
         </Route>
-      </Route>
     </Routes>
   </StrictMode>
   </BrowserRouter>,

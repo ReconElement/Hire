@@ -63,7 +63,14 @@ const Posts = ()=>{
         }
         getPosts();
     }, []);
-    
+    let totalPage;
+    if(posts){
+        totalPage=Math.ceil(posts.length % 9)+1;
+    }
+    else{
+        totalPage=1;
+    }
+    console.log(totalPage)
     return(
         <div className="bg-darkviolet min-h-screen">
             <div>
