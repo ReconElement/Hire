@@ -94,6 +94,3 @@ function Expand(props: {value: Post, id: number}){
     )
 }
 export default Posts;
-//going for a piss will come back.
-
-
