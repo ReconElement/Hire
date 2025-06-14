@@ -55,7 +55,6 @@ const PostPage = () => {
   setRoute(page);
   //state for pagination 
   const [state, setState] = useState<number>();
-
   let buf;
   const navigate = useNavigate();
   useEffect(() => {
@@ -73,6 +72,7 @@ const PostPage = () => {
     };
     getPosts();
   }, [route]);
+  
   const posts_length = 210; //to mimic posts.length;
   let totalPage;
   // let displayNow = posts?.slice(0, 9);
@@ -80,7 +80,7 @@ const PostPage = () => {
   if (posts) {
     totalPage = Math.ceil(posts.length / 9);
     // totalPage = Math.ceil(posts_length/9);
-    if (route >= totalPage) {
+    if (route > totalPage) {
       setRoute(totalPage);
     }
   } else {
@@ -96,8 +96,8 @@ const PostPage = () => {
   }
   const handlePageChange = (e: React.ChangeEvent<unknown>, value: number)=>{
     setState(value);
-    // navigate(`/posts/${value}`)
-    console.log(value);
+    // setRoute(value);
+    navigate(`/posts/${value}`);
   }
   return (
     // <div>
