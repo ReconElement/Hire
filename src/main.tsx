@@ -8,6 +8,7 @@ import Posts from './components/Posts/Posts.tsx';
 import PostPage from './components/Posts/PostPage.tsx'
 import PostDetail from './components/Posts/PostDetail.tsx'
 import PostExpand from './components/Posts/PostExpand.tsx'
+import Test from './components/Posts/Test.tsx'
 import NewPosts from './components/Posts/NewPosts.tsx'
 // import PostsPersist from './components/Posts/PostsPersist.tsx'
 import './index.css';
@@ -32,6 +33,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/posts" element={<NewPosts/>}>
           <Route path=":page" element={<PostPage/>}/>
         </Route>
+      <Route path="/test" element={<Test/>}/>
     </Routes>
   </StrictMode>
   </BrowserRouter>,

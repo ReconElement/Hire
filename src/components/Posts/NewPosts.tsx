@@ -16,7 +16,7 @@ const NewPosts=()=>{
         route: route, 
         setRoute: setRoute
     }
-    console.log(route);
+    console.log(`Route: ${route}`);
     return(
        <Outlet context={obj}/>
     )

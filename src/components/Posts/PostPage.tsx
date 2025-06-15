@@ -54,7 +54,7 @@ const PostPage = () => {
   const { route, setRoute } = useOutletContext();
   setRoute(page);
   //state for pagination 
-  const [state, setState] = useState<number>();
+  const [state, setState] = useState<number>(1);
   let buf;
   const navigate = useNavigate();
   useEffect(() => {
@@ -72,9 +72,7 @@ const PostPage = () => {
     };
     getPosts();
   }, [route]);
-  
-  const posts_length = 210; //to mimic posts.length;
-  let totalPage;
+  let totalPage: number;
   // let displayNow = posts?.slice(0, 9);
   let displayNow;
   if (posts) {
@@ -94,10 +92,26 @@ const PostPage = () => {
     endIndex = Math.abs(beginIndex + 9);
     displayNow = posts.slice(beginIndex, endIndex);
   }
+  // useEffect(()=>{
+  //   function check(){
+  //     if(route<totalPage){
+  //       setState(route);
+  //       console.log(`Route value inside useEffect fn check() ${route}`);
+  //     }
+  //     else{
+  //       setState(totalPage);
+  //     }
+  //     console.log(`Total Page: ${totalPage}`);
+  //   };
+  //   check();
+  // },);
+  // console.log(`State: ${state}`);
   const handlePageChange = (e: React.ChangeEvent<unknown>, value: number)=>{
-    setState(value);
-    // setRoute(value);
+    e.preventDefault();
+    e.stopPropagation();
     navigate(`/posts/${value}`);
+    setState(value);
+    console.log(`Changing value by clicking on the pagination component: ${value}`)
   }
   return (
     // <div>
@@ -135,7 +149,7 @@ const PostPage = () => {
       </div>
       <div className="flex justify-center">
         <Stack spacing={2}>
-            <Pagination count={totalPage} page={state} color={"primary"} onChange={handlePageChange}/>
+            <Pagination count={totalPage} page={state} defaultPage={route} color={"primary"} onChange={handlePageChange}/>
         </Stack>
       </div>
       <div className="flex justify-center p-2">
