@@ -13,6 +13,13 @@ const TitleBar = () => {
       </div>
       <div className="hidden md:flex flex-row w-full justify-end poppins-regular text-lightviolet "></div>
       {/* To be made a responsive page on a later iteration */}
+       <div className="hidden md:flex flex-row w-full justify-end poppins-regular text-lightviolet ">
+        <div className="p-3 pl-2 hover-underline ">
+          <nav>
+            <NavLink to="/post">Post Job</NavLink>
+          </nav>
+        </div>
+      </div>
     </div>
   );
 };

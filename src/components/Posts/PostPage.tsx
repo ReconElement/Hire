@@ -8,9 +8,7 @@ import "../../App.css";
 import { useOutletContext } from "react-router";
 import TitleBar from "../Posts/Titlebar";
 import Footer from "../Landing/Footer";
-import * as React from 'react';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Pagination from "../Posts/Pagination";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
@@ -43,9 +41,7 @@ const usePostsStorage = create<PostsAPI>()((set) => ({
     }));
   },
 }));
-// interface OutletProps{
-//     setRoute: React.Dispatch<React.SetStateAction<string | undefined>>
-// }
+
 const PostPage = () => {
   let beginIndex = 0;
   let endIndex = 0;
@@ -53,8 +49,9 @@ const PostPage = () => {
   const { posts, loading, setLoading, setPosts } = usePostsStorage();
   const { route, setRoute } = useOutletContext();
   setRoute(page);
-  //state for pagination 
-  const [state, setState] = useState<number>(1);
+  const [state, setState] = useState<number>(route);
+  console.log(`Route: ${route} State: ${route}`)
+
   let buf;
   const navigate = useNavigate();
   useEffect(() => {
@@ -106,13 +103,6 @@ const PostPage = () => {
   //   check();
   // },);
   // console.log(`State: ${state}`);
-  const handlePageChange = (e: React.ChangeEvent<unknown>, value: number)=>{
-    e.preventDefault();
-    e.stopPropagation();
-    navigate(`/posts/${value}`);
-    setState(value);
-    console.log(`Changing value by clicking on the pagination component: ${value}`)
-  }
   return (
     // <div>
     //     <div>
@@ -148,9 +138,7 @@ const PostPage = () => {
         )}
       </div>
       <div className="flex justify-center">
-        <Stack spacing={2}>
-            <Pagination count={totalPage} page={state} defaultPage={route} color={"primary"} onChange={handlePageChange}/>
-        </Stack>
+        <Pagination state={state} setState={setState} totalPage={totalPage}/>
       </div>
       <div className="flex justify-center p-2">
         <Footer />

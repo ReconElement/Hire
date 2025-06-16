@@ -81,7 +81,7 @@ const LoginCard2 = ({ setShow}:Show) => {
           console.log(e);
         }
         if(res?.status===200){
-          navigate('/post');
+          navigate('/posts');
         }else{
           alert("Wrong email/username or password");
         }
