@@ -6,7 +6,7 @@ import Signup from './components/Signup.tsx'
 import Post from './components/Post.tsx'
 import Posts from './components/Posts/Posts.tsx';
 import PostPage from './components/Posts/PostPage.tsx'
-import PostDetail from './components/Posts/PostDetail.tsx'
+import PostRouter from './components/Posts/PostRouter.tsx'
 import PostExpand from './components/Posts/PostExpand.tsx'
 import Test from './components/Posts/Test.tsx'
 import NewPosts from './components/Posts/NewPosts.tsx'
@@ -30,11 +30,15 @@ createRoot(document.getElementById('root')!).render(
           <Route path=":post" element={<PostExpand/>}/>
         </Route> */}
       {/* </Route> */}
-        <Route path="/posts" element={<NewPosts/>}>
+        <Route path="/pages" element={<NewPosts/>}>
           <Route path=":page" element={<PostPage/>}/>
+        </Route>
+        <Route path="/posts" element={<PostRouter/>}>
+          <Route path=":postRoute" element={<PostExpand/>}/>
         </Route>
       <Route path="/test" element={<Test/>}/>
     </Routes>
   </StrictMode>
   </BrowserRouter>,
 )
+//going to a pissbreak will come back 

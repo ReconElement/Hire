@@ -35,7 +35,7 @@ const Pagination = ({state, setState, totalPage}:{state: number, setState: React
         document.getElementById("forward").disabled = false;
     }
     return(
-        <div className="flex flex-row">
+        <div className="flex flex-row poppins-light">
             <p className="p-2 text-lightblue">1</p>
             <button className="p-2 mr-2 shadow-md shadow-blue-400 rounded-xl active:shadow-none focus:shadow-blue-400 disabled:shadow-none" onClick={decreasePage} id="backward" title="backward"><Backarrow/></button>
             <input className="w-8 text-lightblue outline-none text-center" value={state} type="text" name="page" id="page" title="page" />

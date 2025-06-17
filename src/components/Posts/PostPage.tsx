@@ -50,7 +50,7 @@ const PostPage = () => {
   const { route, setRoute } = useOutletContext();
   setRoute(page);
   const [state, setState] = useState<number>(route);
-
+  console.log(`Route as obtained from the router string: ${route}`);
 
   let buf;
   const navigate = useNavigate();
@@ -76,10 +76,14 @@ const PostPage = () => {
     totalPage = Math.ceil(posts.length / 9);
     // totalPage = Math.ceil(posts_length/9);
     if (route > totalPage) {
-      setRoute(totalPage);
+      // setRoute(totalPage);
+      navigate(`/pages/${totalPage}`);
     }
   } else {
     totalPage = 1;
+  }
+  if(route<1){
+    navigate('/pages/1');
   }
   if (posts && page) {
     //let us set the posts.length to see how stuff pans out at 210 posts
@@ -91,7 +95,7 @@ const PostPage = () => {
   }
   useEffect(()=>{
     function switchPage(){
-      navigate(`/posts/${state}`);
+      navigate(`/pages/${state}`);
     };
     switchPage();
   },[state, navigate]);

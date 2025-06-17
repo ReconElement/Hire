@@ -45,7 +45,7 @@ const LoginCardPage = ()=>{
           console.log(e);
         }
         if(res?.status===200){
-          navigate('/posts')
+          navigate('/pages')
         }else{
           alert("Wrong username/email or password")
         }
