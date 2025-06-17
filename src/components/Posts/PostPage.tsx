@@ -50,7 +50,7 @@ const PostPage = () => {
   const { route, setRoute } = useOutletContext();
   setRoute(page);
   const [state, setState] = useState<number>(route);
-  console.log(`Route: ${route} State: ${route}`)
+
 
   let buf;
   const navigate = useNavigate();
@@ -89,6 +89,12 @@ const PostPage = () => {
     endIndex = Math.abs(beginIndex + 9);
     displayNow = posts.slice(beginIndex, endIndex);
   }
+  useEffect(()=>{
+    function switchPage(){
+      navigate(`/posts/${state}`);
+    };
+    switchPage();
+  },[state, navigate]);
   // useEffect(()=>{
   //   function check(){
   //     if(route<totalPage){
