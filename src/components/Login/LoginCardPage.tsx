@@ -45,7 +45,12 @@ const LoginCardPage = ()=>{
           console.log(e);
         }
         if(res?.status===200){
-          navigate('/pages')
+          console.log(res.data);
+          const id: string|undefined= (res?.data).toString();
+          if(id){
+            localStorage.setItem('id',id);
+          }
+          navigate('/pages');
         }else{
           alert("Wrong username/email or password")
         }

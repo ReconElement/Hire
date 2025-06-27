@@ -81,6 +81,15 @@ const LoginCard2 = ({ setShow}:Show) => {
           console.log(e);
         }
         if(res?.status===200){
+          try{
+            const id: string | undefined = (res?.data).toString();
+            if(id){
+              localStorage.setItem("id",id);
+            }
+          }
+          catch(e){
+            console.log(e);
+          }
           navigate('/pages');
         }else{
           alert("Wrong email/username or password");

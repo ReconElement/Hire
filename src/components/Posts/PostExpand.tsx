@@ -38,7 +38,7 @@ const PostExpand = ()=>{
     const navigate = useNavigate();
     const {postRoute} = useParams();
     const {route, setRoute} = useOutletContext();
-    const {posts, loading, setLoading, setPosts}:{posts: Posts} = usePostsStorage();
+    const {posts, loading, setLoading, setPosts} = usePostsStorage();
     let buf;
     setRoute(postRoute);
     useEffect(()=>{
