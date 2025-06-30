@@ -68,8 +68,8 @@ const PostExpand = ()=>{
             navigate(`/posts/${endRoute}`);
         }
     }
-    console.log(`Begins ${beginRoute}`);
-    console.log(`Ends at ${endRoute}`);
+    // console.log(`Begins ${beginRoute}`);
+    // console.log(`Ends at ${endRoute}`);
     return(
         <div>
             <div>
