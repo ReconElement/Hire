@@ -77,6 +77,7 @@ const Edit =({id, post}:{id: number, post: Post})=>{
             <div>
                 <form action="" onSubmit={(e)=>{}}>
                     <textarea id="content" title="content" name="content" className="" value={value} onChange={onChange}></textarea>
+                    <input type="submit" value="" onClick={(e)} />
                 </form>
             </div>
         </div>
