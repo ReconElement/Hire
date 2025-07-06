@@ -1,5 +1,5 @@
 import '../../App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {create} from 'zustand';
 type Post = {
     id: number,
@@ -16,6 +16,8 @@ interface Content{
     }
     updateTitle?: (e: React.ChangeEvent<HTMLInputElement>)=>void,
     updateContent?: (e: React.ChangeEvent<HTMLTextAreaElement>)=>void,
+    setTitle?: (title: string)=>void,
+    setContent?: (content: string)=>void,
 }
 const useContents = create<Content>()((set)=>({
     data: {
@@ -25,16 +27,23 @@ const useContents = create<Content>()((set)=>({
     updateTitle: (e: React.ChangeEvent<HTMLInputElement>)=>{
         e.preventDefault();
         e.stopPropagation();
-        set(()=>({data: {title: e.target.value}}));
+        set((state)=>({data: {title: e.target.value, content: state.data.content}}));
     },
     updateContent: (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
         e.preventDefault();
         e.stopPropagation();
-        set(()=>({data: {content: e.target.value}}));
+        set((state)=>({data: {content: e.target.value, title: state.data.title}}));
+    },
+    setTitle: (title: string)=>{
+        set((state)=>({data: {title: title, content: state.data.content}}))
+    },
+    setContent: (content: string)=>{
+        set((state)=>({data: {content: content, title: state.data.title}}))
     }
 }));
 const PostDetail = ({id,post}:{id: number, post: Post})=>{
-    const {data, updateTitle, updateContent} = useContents();
+    
+    const {data, updateTitle, updateContent, setTitle, setContent} = useContents();
     const [editFlag, setEditFlag] = useState(false);
     const postId = id.toString();
     const authId: string | null = localStorage.getItem('id');
@@ -50,6 +59,10 @@ const PostDetail = ({id,post}:{id: number, post: Post})=>{
         e.stopPropagation();
         setEditFlag(true);
     }
+    useEffect(()=>{
+            setTitle?.(post.title);
+            setContent?.(post.content);
+    },[])
     return(
         <div id={postId} className='bg-darkviolet poppins-regular'>
             <div className="p-2 m-2 text-lightblue">
@@ -66,7 +79,7 @@ const PostDetail = ({id,post}:{id: number, post: Post})=>{
                     {match && <button type="button" onClick={onClick} className="m-2 p-2 shadow-sm shadow-lightblue rounded-md active:shadow-none focus:shadow-sm" >Edit</button>}
                 </div>
             </div>
-            {match && editFlag?<div><Edit id={post.id} post={post} /></div>:<div></div>}
+            {match && editFlag?<div><Edit id={post.id} post={post} data={data} updateTitle={updateTitle} updateContent={updateContent}/></div>:<div></div>}
         </div> 
     )
 };
@@ -117,11 +130,12 @@ const Edit = ({id, post, data, updateTitle, updateContent}:{id: number, post: Po
         console.log(data.title);
         console.log(data.content);
     }
+    
     return(
         <div className="p-2 m-2 poppins-regular">
             <form action="" onSubmit={onSubmit}>
-                <input type="text" name="title" id="title" value={data.title} placeholder={post.title} onChange={updateTitle}/>
-                <textarea name="content" value={data.content} id="content" placeholder={post.content} onChange={updateContent}></textarea>
+                <input type="text" name="title" id="title" title="title" value={data.title || post.title} onChange={updateTitle}/>
+                <textarea name="content" value={data.content || post.title} title="content" id="content" onChange={updateContent}></textarea>
                 <button type="submit">Submit</button>
             </form>
         </div>
