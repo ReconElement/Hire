@@ -42,7 +42,6 @@ const useContents = create<Content>()((set)=>({
     }
 }));
 const PostDetail = ({id,post}:{id: number, post: Post})=>{
-    
     const {data, updateTitle, updateContent, setTitle, setContent} = useContents();
     const [editFlag, setEditFlag] = useState(false);
     const postId = id.toString();
@@ -132,11 +131,11 @@ const Edit = ({id, post, data, updateTitle, updateContent}:{id: number, post: Po
     }
     
     return(
-        <div className="p-2 m-2 poppins-regular">
-            <form action="" onSubmit={onSubmit}>
-                <input type="text" name="title" id="title" title="title" value={data.title || post.title} onChange={updateTitle}/>
-                <textarea name="content" value={data.content || post.title} title="content" id="content" onChange={updateContent}></textarea>
-                <button type="submit">Submit</button>
+        <div className="p-2 m-2 poppins-regular text-lightblue ">
+            <form className="flex flex-col" action="" onSubmit={onSubmit}>
+                <input type="text" className="p-2 m-2 outline-2 outline-offset-2 outline-solid outline-darkblue rounded-2xl" name="title" id="title" title="title" value={data.title || post.title} onChange={updateTitle}/>
+                <textarea name="content" rows={8} cols={5} className="p-2 m-2 outline-2 outline-offset-2 outline-solid outline-darkblue rounded-2xl resize-none" value={data.content || post.title} title="content" id="content" onChange={updateContent}></textarea>
+                <div className="flex justify-center"><button type="submit" className="p-2 m-2 shadow-sm shadow-lightblue rounded-md active:shadow-none focus:shadow-sm">Submit</button></div>
             </form>
         </div>
     )
