@@ -1,5 +1,6 @@
 import '../../App.css';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {create} from 'zustand';
 type Post = {
     id: number,
@@ -41,7 +42,41 @@ const useContents = create<Content>()((set)=>({
         set((state)=>({data: {content: content, title: state.data.title}}))
     }
 }));
+type setShow = {
+	setShowDelete: React.Dispatch<React.SetStateAction<boolean>>
+}
+const DeleteCard = ({setShowDelete}:setShow)=>{
+	const onClick=(e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+		e.preventDefault();
+		e.stopPropagation();
+		setShowDelete(false);
+	}
+	return(
+		<div className="flex flex-col fixed top-12 text-lightblue left-42 bg-gradient-to-r from-lightviolet to-darkviolet p-2 m-2 shadow-sm shadow-lightblue poppins-regular rounded-md">
+			<div>
+				<span>
+					Do you want to delete this post?
+				</span>
+			</div>
+			<div>
+				<button onClick={onClick} className="p-2 m-2 shadow-sm shadow-lightblue active:shadow-none focus:shadow-sm rounded-md">Yes</button>
+			</div>
+			<div>
+				<button onClick={onClick} className="p-2 m-2 shadow-sm shadow-lightblue active:shadow-none focus:shadow-sm rounded-md">Cancel</button>
+			</div>
+		</div>
+	)
+}
+const ShowDeleteCard = ({setShowDelete}: setShow)=>{
+	return createPortal(
+		<div>
+			<DeleteCard setShowDelete={setShowDelete}/>
+		</div>,
+		document.body
+	)
+}
 const PostDetail = ({id,post}:{id: number, post: Post})=>{
+	const [showDelete, setShowDelete] = useState<boolean>(false);
     const {data, updateTitle, updateContent, setTitle, setContent} = useContents();
     const [editFlag, setEditFlag] = useState(false);
     const postId = id.toString();
@@ -61,9 +96,14 @@ const PostDetail = ({id,post}:{id: number, post: Post})=>{
     useEffect(()=>{
             setTitle?.(post.title);
             setContent?.(post.content);
-    },[])
+    },[]);
+	const onClickDelete=(e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+		e.preventDefault();
+		e.stopPropagation();
+		setShowDelete(true);
+	}
     return(
-        <div id={postId} className='bg-darkviolet poppins-regular'>
+        <div id={postId} className='bg-gradient-to-r from-lightviolet to-darkviolet poppins-regular'>
             <div className="p-2 m-2 text-lightblue">
                 <div className="text-2xl">
                     {post.id}
@@ -74,10 +114,16 @@ const PostDetail = ({id,post}:{id: number, post: Post})=>{
                 <div className="">
                     {post.content}
                 </div>
-                <div>
-                    {match && <button type="button" onClick={onClick} className="m-2 p-2 shadow-sm shadow-lightblue rounded-md active:shadow-none focus:shadow-sm" >Edit</button>}
-                </div>
-            </div>
+					<div className="flex flex-row">
+                		<div>
+                    		{match && <button type="button" onClick={onClick} className="m-2 p-2 shadow-sm shadow-lightblue rounded-md active:shadow-none focus:shadow-sm" >Edit</button>}
+                		</div>
+						<div>
+							{match && <button type="button" onClick={onClickDelete} className="m-2 p-2 shadow-sm shadow-lightblue rounded-md active:shadow-none focus:shadow-sm">Delete</button>}
+						</div>
+					</div>
+            	</div>
+				{showDelete && <div><ShowDeleteCard setShowDelete={setShowDelete}/></div>}
             {match && editFlag?<div><Edit id={post.id} post={post} data={data} updateTitle={updateTitle} updateContent={updateContent}/></div>:<div></div>}
         </div> 
     )
@@ -131,7 +177,7 @@ const Edit = ({id, post, data, updateTitle, updateContent}:{id: number, post: Po
     }
     
     return(
-        <div className="p-2 m-2 poppins-regular text-lightblue ">
+        <div className="p-2 m-2 poppins-regular text-lightblue bg-gradient-to-r from-lightviolet to-darkviolet">
             <form className="flex flex-col" action="" onSubmit={onSubmit}>
                 <input type="text" className="p-2 m-2 outline-2 outline-offset-2 outline-solid outline-darkblue rounded-2xl" name="title" id="title" title="title" value={data.title || post.title} onChange={updateTitle}/>
                 <textarea name="content" rows={8} cols={5} className="p-2 m-2 outline-2 outline-offset-2 outline-solid outline-darkblue rounded-2xl resize-none" value={data.content || post.title} title="content" id="content" onChange={updateContent}></textarea>
