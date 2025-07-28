@@ -10,6 +10,13 @@ type Post = {
     updatedAt: Date | null,
     authorId: number
 }
+const element = document.createElement('div');
+element.style.width = '100vw';
+element.style.height = '100vh';
+element.style.position = 'fixed';
+element.style.top = '0';
+element.style.right = '0';
+
 interface Content{
     data: {
         title?: string,
@@ -42,6 +49,8 @@ const useContents = create<Content>()((set)=>({
         set((state)=>({data: {content: content, title: state.data.title}}))
     }
 }));
+//page-cover: it'll freeze the dom 
+
 type setShow = {
 	setShowDelete: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -50,6 +59,7 @@ const DeleteCard = ({setShowDelete}:setShow)=>{
 		e.preventDefault();
 		e.stopPropagation();
 		setShowDelete(false);
+        document.body.removeChild(element);
 	}
 	return(
 		<div className="flex flex-col fixed top-12 text-lightblue left-42 bg-gradient-to-r from-lightviolet to-darkviolet p-2 m-2 shadow-sm shadow-lightblue poppins-regular rounded-md">
@@ -67,12 +77,13 @@ const DeleteCard = ({setShowDelete}:setShow)=>{
 		</div>
 	)
 }
+
 const ShowDeleteCard = ({setShowDelete}: setShow)=>{
 	return createPortal(
 		<div>
 			<DeleteCard setShowDelete={setShowDelete}/>
 		</div>,
-		document.body
+		document.body.appendChild(element)
 	)
 }
 const PostDetail = ({id,post}:{id: number, post: Post})=>{
@@ -124,7 +135,7 @@ const PostDetail = ({id,post}:{id: number, post: Post})=>{
 					</div>
             	</div>
 				{showDelete && <div><ShowDeleteCard setShowDelete={setShowDelete}/></div>}
-            {match && editFlag?<div><Edit id={post.id} post={post} data={data} updateTitle={updateTitle} updateContent={updateContent}/></div>:<div></div>}
+            {match && editFlag?<div><Edit id={post.id} post={post} data={data} updateTitle={updateTitle} updateContent={updateContent} setEditFlag={setEditFlag}/></div>:<div></div>}
         </div> 
     )
 };
@@ -168,19 +179,20 @@ const Display =({id, post}:{id: number, post: Post})=>{
 //     )
 // }
 
-const Edit = ({id, post, data, updateTitle, updateContent}:{id: number, post: Post, data: Content["data"], updateTitle: Content["updateTitle"],updateContent: Content["updateContent"] })=>{
+const Edit = ({id, post, data, updateTitle, updateContent, setEditFlag}:{id: number, post: Post, data: Content["data"], updateTitle: Content["updateTitle"],updateContent: Content["updateContent"], setEditFlag: React.Dispatch<React.SetStateAction<boolean>>})=>{
     const onSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         e.stopPropagation();
         console.log(data.title);
         console.log(data.content);
+        setEditFlag(false);
     }
     
     return(
         <div className="p-2 m-2 poppins-regular text-lightblue bg-gradient-to-r from-lightviolet to-darkviolet">
             <form className="flex flex-col" action="" onSubmit={onSubmit}>
-                <input type="text" className="p-2 m-2 outline-2 outline-offset-2 outline-solid outline-darkblue rounded-2xl" name="title" id="title" title="title" value={data.title || post.title} onChange={updateTitle}/>
-                <textarea name="content" rows={8} cols={5} className="p-2 m-2 outline-2 outline-offset-2 outline-solid outline-darkblue rounded-2xl resize-none" value={data.content || post.title} title="content" id="content" onChange={updateContent}></textarea>
+                <input type="text" className="p-2 m-2 outline-2 outline-offset-2 outline-solid outline-darkblue rounded-2xl" name="title" id="title" title="title" value={data.title} onChange={updateTitle}/>
+                <textarea name="content" rows={8} cols={5} className="p-2 m-2 outline-2 outline-offset-2 outline-solid outline-darkblue rounded-2xl resize-none" value={data.content} title="content" id="content" onChange={updateContent}></textarea>
                 <div className="flex justify-center"><button type="submit" className="p-2 m-2 shadow-sm shadow-lightblue rounded-md active:shadow-none focus:shadow-sm">Submit</button></div>
             </form>
         </div>

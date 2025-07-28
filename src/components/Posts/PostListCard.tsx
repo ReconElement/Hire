@@ -1,4 +1,5 @@
 import '../../App.css';
+import { useNavigate } from 'react-router';
 type Post = {
     id: number,
     title: string,
@@ -10,6 +11,12 @@ type Post = {
 //first deal with sample data 
 
 const PostListCard = (props: {value: Post, id: number})=>{
+    const navigate = useNavigate();
+    function onClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
+        e.preventDefault();
+        e.stopPropagation();
+        navigate(`/posts/${props.id}`);
+    }
     return(
         <div key={props.id} className="p-2 m-2 max-h-48  bg-gradient-to-r text-lightblue from-lightviolet to-darkviolet border-sm rounded-md max-w-md">
             <div className="p-2 poppins-medium">
@@ -19,7 +26,7 @@ const PostListCard = (props: {value: Post, id: number})=>{
                 {props.value.content}
             </div>
             <div className="p-2">
-                <button className="text-darkviolet p-2 m-2 shadow-sm shadow-lightblue rounded-2xl poppins-bold active:shadow-none focus:shadow-sm">Expand</button>
+                <button onClick={onClick} className="text-darkviolet p-2 m-2 shadow-sm shadow-lightblue rounded-2xl poppins-bold active:shadow-none focus:shadow-sm">Expand</button>
             </div>
         </div>
     )
