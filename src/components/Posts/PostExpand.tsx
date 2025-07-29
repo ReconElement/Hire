@@ -58,7 +58,8 @@ const PostExpand = ()=>{
         getPosts();
     },[route]);
     const beginRoute = 1;
-    const endRoute = posts?.[posts.length-1].id;
+    // const endRoute = posts?.[posts.length-1].id;
+    const endRoute = posts?.[posts.length-1];
     //shift the post array by 1 
     if(route<beginRoute){
         navigate(`/posts/${beginRoute}`);

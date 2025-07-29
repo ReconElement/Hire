@@ -139,9 +139,11 @@ const PostPage = () => {
       <div className=" pt-20 px-2 h-screen overflow-y-hidden">
         {loading && posts && (
           <div className="flex justify-left flex-wrap">
-            {displayNow?.map((val: Post, id: number) => (
+            {displayNow?.map((val: Post, id) => (
               <div>
-                <PostListCard value={val} id={val.id} />
+                {/* <PostListCard value={val} id={val.id} /> */}
+                {/* Increase the local id by 1 to match */}
+                <PostListCard value={val} id={id+1}/>
               </div>
             ))}
           </div>

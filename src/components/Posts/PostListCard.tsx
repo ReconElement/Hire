@@ -15,6 +15,7 @@ const PostListCard = (props: {value: Post, id: number})=>{
     function onClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
         e.preventDefault();
         e.stopPropagation();
+        console.log(`Local post id: ${props.id}`);
         navigate(`/posts/${props.id}`);
     }
     return(

@@ -25,4 +25,29 @@ const postPostAPICall = async (title: string, content: string)=>{
     return res;
 }
 
-export {getPostAPICall, postPostAPICall};
+const updatePostAPICall = async (id: string, title: string, content: string)=>{
+    let res;
+    try{
+        res = await axios.post(`${import.meta.env.VITE_DEV_API_URL}/post/update/${id}`, {
+            title: title,
+            content: content
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+    return res;
+}
+
+const deletePostAPICall = async (id: string)=>{
+    let res;
+    try{
+        res = await axios.delete(`${import.meta.env.VITE_DEV_API_URL}/post/delete/${id}`);
+    }
+    catch(e){
+        console.log(e);
+    }
+    return res;
+}
+
+export {getPostAPICall, postPostAPICall, updatePostAPICall, deletePostAPICall};

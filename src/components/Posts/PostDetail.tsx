@@ -2,6 +2,7 @@ import '../../App.css';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {create} from 'zustand';
+import { updatePostAPICall, deletePostAPICall } from '../../API/post';
 type Post = {
     id: number,
     title: string,
@@ -52,15 +53,28 @@ const useContents = create<Content>()((set)=>({
 //page-cover: it'll freeze the dom 
 
 type setShow = {
-	setShowDelete: React.Dispatch<React.SetStateAction<boolean>>
+	setShowDelete: React.Dispatch<React.SetStateAction<boolean>>,
+    id: string
 }
-const DeleteCard = ({setShowDelete}:setShow)=>{
-	const onClick=(e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+const DeleteCard = ({setShowDelete, id}:setShow)=>{
+	const onClickCancel=(e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 		e.preventDefault();
 		e.stopPropagation();
 		setShowDelete(false);
         document.body.removeChild(element);
 	}
+    const onClickDelete = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        let res;
+        try{
+            res = await deletePostAPICall(id);
+        }
+        catch(e){
+            console.log(e);
+        }
+        console.log(res);
+    }
 	return(
 		<div className="flex flex-col fixed top-12 text-lightblue left-42 bg-gradient-to-r from-lightviolet to-darkviolet p-2 m-2 shadow-sm shadow-lightblue poppins-regular rounded-md">
 			<div>
@@ -69,19 +83,19 @@ const DeleteCard = ({setShowDelete}:setShow)=>{
 				</span>
 			</div>
 			<div>
-				<button onClick={onClick} className="p-2 m-2 shadow-sm shadow-lightblue active:shadow-none focus:shadow-sm rounded-md">Yes</button>
+				<button onClick={onClickDelete} className="p-2 m-2 shadow-sm shadow-lightblue active:shadow-none focus:shadow-sm rounded-md">Yes</button>
 			</div>
 			<div>
-				<button onClick={onClick} className="p-2 m-2 shadow-sm shadow-lightblue active:shadow-none focus:shadow-sm rounded-md">Cancel</button>
+				<button onClick={onClickCancel} className="p-2 m-2 shadow-sm shadow-lightblue active:shadow-none focus:shadow-sm rounded-md">Cancel</button>
 			</div>
 		</div>
 	)
 }
 
-const ShowDeleteCard = ({setShowDelete}: setShow)=>{
+const ShowDeleteCard = ({setShowDelete, id}: setShow)=>{
 	return createPortal(
 		<div>
-			<DeleteCard setShowDelete={setShowDelete}/>
+			<DeleteCard setShowDelete={setShowDelete} id={id}/>
 		</div>,
 		document.body.appendChild(element)
 	)
@@ -95,6 +109,7 @@ const PostDetail = ({id,post}:{id: number, post: Post})=>{
     const authIdPost = post.authorId;
     console.log(`auth id as inferred from post = ${authIdPost}`);
     console.log(`authId = ${authId}`);
+    console.log(`Local Post Id: ${id}`);
     let match = false;
     if(authId){
         match = parseInt(authId) === authIdPost;
@@ -134,7 +149,7 @@ const PostDetail = ({id,post}:{id: number, post: Post})=>{
 						</div>
 					</div>
             	</div>
-				{showDelete && <div><ShowDeleteCard setShowDelete={setShowDelete}/></div>}
+				{showDelete && <div><ShowDeleteCard setShowDelete={setShowDelete} id={postId}/></div>}
             {match && editFlag?<div><Edit id={post.id} post={post} data={data} updateTitle={updateTitle} updateContent={updateContent} setEditFlag={setEditFlag}/></div>:<div></div>}
         </div> 
     )
@@ -180,12 +195,17 @@ const Display =({id, post}:{id: number, post: Post})=>{
 // }
 
 const Edit = ({id, post, data, updateTitle, updateContent, setEditFlag}:{id: number, post: Post, data: Content["data"], updateTitle: Content["updateTitle"],updateContent: Content["updateContent"], setEditFlag: React.Dispatch<React.SetStateAction<boolean>>})=>{
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
+        let res;
         e.preventDefault();
         e.stopPropagation();
-        console.log(data.title);
-        console.log(data.content);
+        try{
+            res = await updatePostAPICall(id.toString(), data.title || post.title, data.content || post.content);
+        }catch(e){
+            console.log(e);
+        }
         setEditFlag(false);
+        console.log(res);
     }
     
     return(
