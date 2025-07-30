@@ -44,9 +44,10 @@ const usePostsStorage = create<PostsAPI>()((set) => ({
 
 const PostPage = () => {
   let beginIndex = 0;
-  let endIndex = 0;
   const { page } = useParams();
   const { posts, loading, setLoading, setPosts } = usePostsStorage();
+  let numPost = posts?.length;
+  let endIndex = posts?.[numPost-1].id || 0;
   const { route, setRoute } = useOutletContext();
   setRoute(page);
   const [state, setState] = useState<number>(route);
@@ -82,9 +83,9 @@ const PostPage = () => {
   } else {
     totalPage = 1;
   }
-  if(route<1){
-    navigate('/pages/1');
-  }
+  // if(route<1){
+  //   navigate('/pages/1');
+  // }
   if (posts && page) {
     //let us set the posts.length to see how stuff pans out at 210 posts
     beginIndex = posts.length - 9 * parseInt(page) - 1;
@@ -138,12 +139,17 @@ const PostPage = () => {
       </div>
       <div className=" pt-20 px-2 h-screen overflow-y-hidden">
         {loading && posts && (
+          // <div className="flex justify-left flex-wrap">
+          //   {displayNow?.map((val: Post, id) => (
+          //     <div>
+          //       <PostListCard value={val} id={id+1}/>
+          //     </div>
+          //   ))}
+          // </div>
           <div className="flex justify-left flex-wrap">
-            {displayNow?.map((val: Post, id) => (
+            {displayNow?.map((val: Post, id)=>(
               <div>
-                {/* <PostListCard value={val} id={val.id} /> */}
-                {/* Increase the local id by 1 to match */}
-                <PostListCard value={val} id={id+1}/>
+                <PostListCard value={val} values={posts} id={id+1}/>
               </div>
             ))}
           </div>

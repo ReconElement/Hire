@@ -1,3 +1,4 @@
+
 import '../../App.css';
 import { useNavigate } from 'react-router';
 type Post = {
@@ -10,13 +11,26 @@ type Post = {
 }
 //first deal with sample data 
 
-const PostListCard = (props: {value: Post, id: number})=>{
+const PostListCard = (props: {value: Post, id: number, values: Post[]})=>{
     const navigate = useNavigate();
     function onClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
         e.preventDefault();
         e.stopPropagation();
         console.log(`Local post id: ${props.id}`);
-        navigate(`/posts/${props.id}`);
+        let idMatch = function(){
+            for(let i=0; i<props.values.length; i++){
+                if(props.value.title.includes(props.values[i].title)){
+                    return i+1;
+                }
+            }
+        }
+        const routeDirect = idMatch();
+        if(routeDirect){
+            navigate(`/posts/${routeDirect}`);
+        }
+        else{
+            console.log("Some problem ocurred");
+        }
     }
     return(
         <div key={props.id} className="p-2 m-2 max-h-48  bg-gradient-to-r text-lightblue from-lightviolet to-darkviolet border-sm rounded-md max-w-md">
