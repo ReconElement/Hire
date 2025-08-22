@@ -10,6 +10,7 @@ import PostRouter from './components/Posts/PostRouter.tsx'
 import PostExpand from './components/Posts/PostExpand.tsx'
 import Test from './components/Posts/Test.tsx'
 import NewPosts from './components/Posts/NewPosts.tsx'
+import OauthSignUp from './components/Signup/OauthSignUp.tsx'
 // import PostsPersist from './components/Posts/PostsPersist.tsx'
 import './index.css';
 // import App from './App.tsx'
@@ -37,6 +38,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path=":postRoute" element={<PostExpand/>}/>
         </Route>
       <Route path="/test" element={<Test/>}/>
+      <Route path="/oauth" element={<OauthSignUp/>}/>
     </Routes>
   </StrictMode>
   </BrowserRouter>,
